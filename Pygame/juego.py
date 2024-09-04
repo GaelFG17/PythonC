@@ -16,6 +16,9 @@ WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
 
+#Fuente para el contador
+font = pygame.font.Font(None, 36)
+
 # FPS
 clock = pygame.time.Clock()
 
@@ -49,11 +52,18 @@ def create_enemies(num):
 #crear los enemigos
 create_enemies(num_enemies)
 
+score = 0
+
 
 # Función para manejar los disparos
 def shoot_bullet(x, y):
     bullet = pygame.Rect(x + player_width // 2 - bullet_width // 2, y, bullet_width, bullet_height)
     bullets.append(bullet)
+    
+#funcion para mostrar el contador
+def draw_score(score):
+    score_text = font.render(f"Puntuacion: {score}", True, WHITE)
+    screen.blit(score_text, (10, 10))
 
 # Bucle principal del juego
 running = True
@@ -94,6 +104,7 @@ while running:
             if bullet.colliderect(enemy):
                 bullets.remove(bullet)
                 enemies.remove(enemy)
+                score += 1 #incrememntar el contador
                 break
 
     # Dibujar el jugador
@@ -107,6 +118,9 @@ while running:
     #Dibujar enemigos
     for enemy in enemies:
         pygame.draw.rect(screen, RED, enemy)
+        
+    #Dibujar el contador
+    draw_score(score)
 
     # Actualizar la pantalla
     pygame.display.flip()
