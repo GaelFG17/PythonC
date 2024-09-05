@@ -35,6 +35,8 @@ bullet_width = 5
 bullet_height = 10
 bullet_speed = 7
 bullets = []
+shoot_delay = 500  # Tiempo de retraso entre disparos en milisegundos (0.5 segundos)
+last_shot_time = pygame.time.get_ticks()  # Control del tiempo del último disparo
 
 # Enemigos
 enemy_width = 50
@@ -89,8 +91,12 @@ while running:
         player_x -= player_speed
     if keys[pygame.K_RIGHT] and player_x < screen_width - player_width:
         player_x += player_speed
-    if keys[pygame.K_SPACE]:
+
+    # Control de disparo con retraso
+    current_time = pygame.time.get_ticks()  # Obtener el tiempo actual
+    if keys[pygame.K_SPACE] and current_time - last_shot_time > shoot_delay:
         shoot_bullet(player_x, player_y)
+        last_shot_time = current_time  # Actualizar el tiempo del último disparo
 
     # Mover los proyectiles
     for bullet in bullets[:]:
