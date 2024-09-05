@@ -28,6 +28,7 @@ player_height = 50
 player_x = screen_width // 2 - player_width // 2
 player_y = screen_height - player_height - 10
 player_speed = 5
+lives = 3
 
 # Proyectiles
 bullet_width = 5
@@ -39,6 +40,7 @@ bullets = []
 enemy_width = 50
 enemy_heigth = 50
 enemy_speed = 3
+enemy_drop_speed = 5 
 enemies = []
 num_enemies = 5
 
@@ -64,6 +66,11 @@ def shoot_bullet(x, y):
 def draw_score(score):
     score_text = font.render(f"Puntuacion: {score}", True, WHITE)
     screen.blit(score_text, (10, 10))
+    
+#Funcion para las vidas
+def draw_lives(lives):
+    lives_text = font.render(f"Vidas {lives}", True, WHITE)
+    screen.blit(lives_text,(screen_width - 120, 10))
 
 # Bucle principal del juego
 running = True
@@ -92,19 +99,31 @@ while running:
         if bullet.y < 0:
             bullets.remove(bullet)
             
-    #Mover enemigos
-    for enemy in enemies:
-        enemy.x += enemy_speed
+
+    # Mover enemigos
+    for enemy in enemies[:]:
+        enemy.y += enemy_drop_speed  # Mover enemigos hacia abajo
+
+        # Si un enemigo llega al fondo de la pantalla o choca con el jugador, el jugador pierde una vida
+        if enemy.y >= screen_height or enemy.colliderect(pygame.Rect(player_x, player_y, player_width, player_height)):
+            enemies.remove(enemy)
+            lives -= 1
+            if lives == 0:
+                print("PERDISTE")
+                pygame.quit()
+                sys.exit()
+
+        # Si el enemigo llega a los bordes de la pantalla, cambia la dirección
         if enemy.x <= 0 or enemy.x >= screen_width - enemy_width:
-            enemy_speed *= -1 #Ca,biar direccion
-            
+            enemy_speed *= -1
+
     # Detección de colisiones entre proyectiles y enemigos
     for bullet in bullets[:]:
         for enemy in enemies[:]:
             if bullet.colliderect(enemy):
                 bullets.remove(bullet)
                 enemies.remove(enemy)
-                score += 1 #incrememntar el contador
+                score += 1  # Incrementar el contador
                 break
 
     # Dibujar el jugador
@@ -119,8 +138,9 @@ while running:
     for enemy in enemies:
         pygame.draw.rect(screen, RED, enemy)
         
-    #Dibujar el contador
+    #Dibujar el contador y las vidas
     draw_score(score)
+    draw_lives(lives)
 
     # Actualizar la pantalla
     pygame.display.flip()
