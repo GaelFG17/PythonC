@@ -18,3 +18,6 @@ def a_star(origen, destino):
     distancia_minima = {ciudad: float('inf') for ciudad in coord}
     distancia_minima[origen] = 0
     ruta = {origen: [origen]}
+    
+    while heap:
+        _, costo_acumulado, ciudad_actual = heappop(heap)
