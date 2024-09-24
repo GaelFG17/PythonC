@@ -21,3 +21,10 @@ def a_star(origen, destino):
     
     while heap:
         _, costo_acumulado, ciudad_actual = heappop(heap)
+        if ciudad_actual in visitados:
+            continue
+
+        visitados.add(ciudad_actual)
+
+        if ciudad_actual == destino:
+            break
