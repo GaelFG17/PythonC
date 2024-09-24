@@ -39,3 +39,9 @@ def a_star(origen, destino):
                     ruta[ciudad_vecina] = ruta[ciudad_actual] + [ciudad_vecina]
                     
     return ruta[destino], distancia_minima[destino]
+
+def obtenerruta(origen, destino):
+    ruta, distancia = a_star(origen, destino)
+    print(ruta)
+    print(distancia)
+    return ruta, distancia
