@@ -28,3 +28,14 @@ def a_star(origen, destino):
 
         if ciudad_actual == destino:
             break
+        
+        for ciudad_vecina, distancia_vecina in colindaciones[ciudad_actual].items():
+            if ciudad_vecina not in visitados:
+                distancia_nueva = costo_acumulado + distancia_vecina
+
+                if distancia_nueva < distancia_minima[ciudad_vecina]:
+                    distancia_minima[ciudad_vecina] = distancia_nueva
+                    heappush(heap, (distancia_nueva + heuristica(ciudad_vecina, destino), distancia_nueva, ciudad_vecina))
+                    ruta[ciudad_vecina] = ruta[ciudad_actual] + [ciudad_vecina]
+                    
+    return ruta[destino], distancia_minima[destino]
