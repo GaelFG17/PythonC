@@ -15,3 +15,6 @@ def heuristica(ciudad_actual, destino):
 def a_star(origen, destino):
     heap = [(0 + heuristica(origen, destino), 0, origen)]
     visitados = set()
+    distancia_minima = {ciudad: float('inf') for ciudad in coord}
+    distancia_minima[origen] = 0
+    ruta = {origen: [origen]}
