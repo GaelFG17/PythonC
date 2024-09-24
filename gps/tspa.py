@@ -11,3 +11,7 @@ def distancia(ciudad1, ciudad2):
 
 def heuristica(ciudad_actual, destino):
     return distancia(ciudad_actual, destino)
+
+def a_star(origen, destino):
+    heap = [(0 + heuristica(origen, destino), 0, origen)]
+    visitados = set()
