@@ -19,5 +19,13 @@ def get_routes():
         ruta, distancia = obtenerruta(start, end)
         coordenadas_ruta = [coord[ciudad] for ciudad in ruta]
         nodos_intermedios_encontrados = ruta[1:-1]  # Excluye el inicio y el final de la ruta
+        
+        return jsonify({
+            'origen': start,
+            'destino': end,
+            'coordenadas_ruta': coordenadas_ruta,
+            'nodos_intermedios_encontrados': nodos_intermedios,
+            'distancia': distancia
+        })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
