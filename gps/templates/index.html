@@ -6,6 +6,20 @@
     <title>GPS A*</title>
 </head>
 <body>
-    
+    <div class="container">
+        <h1>Ruta Más Corta</h1>
+        <label for="ciudad_inicio">Ciudad Inicial:</label>
+        <select id="ciudad_inicio">
+          {% for ciudad in ciudades %}
+          <option value="{{ ciudad }}">{{ ciudad }}</option>
+          {% endfor %}
+        </select>
+        <label for="ciudad_final">Ciudad Final:</label>
+        <select id="ciudad_final">
+          {% for ciudad in ciudades %}
+          <option value="{{ ciudad }}">{{ ciudad }}</option>
+          {% endfor %}
+        </select>
+    </div>
 </body>
 </html>
