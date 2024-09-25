@@ -14,3 +14,10 @@ def get_routes():
     data = request.get_json()
     start = data['start']
     end = data['end']
+    
+    try:
+        ruta, distancia = obtenerruta(start, end)
+        coordenadas_ruta = [coord[ciudad] for ciudad in ruta]
+        nodos_intermedios_encontrados = ruta[1:-1]  # Excluye el inicio y el final de la ruta
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
