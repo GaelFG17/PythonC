@@ -26,5 +26,20 @@
         <div id="map"></div>
         <div class="info" style="display: none"></div>
     </div>
+
+    <script>
+      let map, directionsService, directionsRenderer;
+
+      function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+          zoom: 5,
+          center: { lat: 23.6345, lng: -102.5528 },
+        });
+
+        directionsService = new google.maps.DirectionsService();
+        directionsRenderer = new google.maps.DirectionsRenderer();
+        directionsRenderer.setMap(map);
+      }
+    </script>
 </body>
 </html>
