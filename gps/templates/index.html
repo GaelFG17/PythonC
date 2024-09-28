@@ -40,6 +40,13 @@
         directionsRenderer = new google.maps.DirectionsRenderer();
         directionsRenderer.setMap(map);
       }
+
+      function trazarRuta(coordenadasRuta, nodosIntermedios, distancia) {
+        const waypoints = coordenadasRuta.slice(1, -1).map((coord) => ({
+          location: { lat: coord[0], lng: coord[1] },
+          stopover: true,
+        }));
+      }
     </script>
 </body>
 </html>
