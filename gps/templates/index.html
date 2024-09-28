@@ -46,6 +46,16 @@
           location: { lat: coord[0], lng: coord[1] },
           stopover: true,
         }));
+
+        const origen = coordenadasRuta[0];
+        const destino = coordenadasRuta[coordenadasRuta.length - 1];
+
+        const request = {
+          origin: { lat: origen[0], lng: origen[1] },
+          destination: { lat: destino[0], lng: destino[1] },
+          waypoints: waypoints,
+          travelMode: google.maps.TravelMode.DRIVING,
+        };
       }
     </script>
 </body>
