@@ -72,6 +72,20 @@
             alert("Error al obtener la ruta: " + status);
           }
         });
+
+        function mostrarInfoRuta(origen, destino, nodosIntermedios, distancia) {
+        const infoDiv = document.querySelector(".info");
+        infoDiv.style.display = "block";
+
+        const ciudadesRuta = [...nodosIntermedios];
+
+        const infoText = `<p><strong>Ruta:</strong> <span>${ciudadesRuta.join(
+          " -> "
+        )}</span></p>
+                      <p><strong>Distancia en km:</strong> <span>${distancia}</span> km</p>`;
+
+        infoDiv.innerHTML = infoText;
+      }
       }
     </script>
 </body>
