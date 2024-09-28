@@ -20,6 +20,11 @@
           <option value="{{ ciudad }}">{{ ciudad }}</option>
           {% endfor %}
         </select>
+
+        <button onclick="obtenerRuta()">Obtener Ruta</button>
+
+        <div id="map"></div>
+        <div class="info" style="display: none"></div>
     </div>
 </body>
 </html>
