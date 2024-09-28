@@ -99,7 +99,18 @@
           },
           body: JSON.stringify({ start: ciudad_inicio, end: ciudad_final }),
         })
-        
+        .then((response) => response.json())
+          .then((data) => {
+            if (data.error) {
+              alert(data.error);
+            } else {
+              trazarRuta(
+                data.coordenadas_ruta,
+                data.nodos_intermedios_encontrados,
+                data.distancia
+              );
+            }
+          })
       }
     </script>
 </body>
