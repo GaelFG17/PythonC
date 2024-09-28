@@ -91,6 +91,14 @@
       function obtenerRuta() {
         const ciudad_inicio = document.getElementById("ciudad_inicio").value;
         const ciudad_final = document.getElementById("ciudad_final").value;
+
+        fetch("/get_routes", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ start: ciudad_inicio, end: ciudad_final }),
+        })
       }
     </script>
 </body>
