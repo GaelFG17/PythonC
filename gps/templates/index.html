@@ -56,6 +56,22 @@
           waypoints: waypoints,
           travelMode: google.maps.TravelMode.DRIVING,
         };
+
+        directionsService.route(request, (result, status) => {
+          if (status === google.maps.DirectionsStatus.OK) {
+            directionsRenderer.setDirections(result);
+
+            let totalDistance = 0;
+            result.routes[0].legs.forEach((leg) => {
+              totalDistance += leg.distance.value;
+            });
+            const distanceInKm = (totalDistance / 1000).toFixed(2);
+
+            mostrarInfoRuta(origen, destino, nodosIntermedios, distanceInKm);
+          } else {
+            alert("Error al obtener la ruta: " + status);
+          }
+        });
       }
     </script>
 </body>
