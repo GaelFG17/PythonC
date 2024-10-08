@@ -7,3 +7,7 @@ import time
 app = Flask(__name__)
 
 arduino = serial.Serial('/dev/cu.usbserial-130', 9600, timeout=1)
+
+@app.route('/')
+def index():
+    return render_template('index.html')
