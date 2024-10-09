@@ -18,6 +18,10 @@ def obt():
     
     try:
         int_data = int(data)
+        if int_data == 1:
+            return jsonify({'status': 'success', 'message': '1'})
+        else:
+            return jsonify({'status': 'error', 'message': 'Data is not 1'})
     except ValueError:
         return jsonify({'status': 'error', 'message': 'Invalid data'})
 
