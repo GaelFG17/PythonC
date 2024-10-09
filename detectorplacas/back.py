@@ -12,3 +12,8 @@ arduino = serial.Serial('/dev/cu.usbserial-130', 9600, timeout=1)
 def index():
     return render_template('index.html')
 
+@app.route('/signal', methods=['GET'])
+def obt():
+    data = arduino.readline().decode('utf-8').strip()
+
+
