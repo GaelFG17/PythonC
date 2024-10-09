@@ -15,5 +15,9 @@ def index():
 @app.route('/signal', methods=['GET'])
 def obt():
     data = arduino.readline().decode('utf-8').strip()
-
+    
+    try:
+        int_data = int(data)
+    except ValueError:
+        return jsonify({'status': 'error', 'message': 'Invalid data'})
 
