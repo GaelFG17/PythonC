@@ -34,3 +34,11 @@ def capture():
         cursor.execute("SELECT * FROM placas WHERE num_placa = %s", (Re.placa,))
         resultado = cursor.fetchone()
         
+        if resultado:
+            print("Placa autorizada")
+            arduino.write(b'2')
+            return "Placa autorizada", Re.placa 
+        else:
+            print("Placa no autorizada")
+            arduino.write(b'3')
+            return "Placa no autorizada"
