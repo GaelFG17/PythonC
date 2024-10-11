@@ -25,3 +25,11 @@ def obt():
     except ValueError:
         return jsonify({'status': 'error', 'message': 'Invalid data'})
 
+@app.route('/capture', methods=['POST'])
+def capture():
+        Re.capture_photo_from_phone_camera()
+        Re.recognize_plate("captured_photo.jpg")
+        conec = cn.conectar_db()
+        cursor = conec.cursor()
+        cursor.execute("SELECT * FROM placas WHERE num_placa = %s", (Re.placa,))
+        resultado = cursor.fetchone()
