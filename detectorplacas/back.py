@@ -33,3 +33,4 @@ def capture():
         cursor = conec.cursor()
         cursor.execute("SELECT * FROM placas WHERE num_placa = %s", (Re.placa,))
         resultado = cursor.fetchone()
+        
