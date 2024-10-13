@@ -42,3 +42,7 @@ def capture():
             print("Placa no autorizada")
             arduino.write(b'3')
             return "Placa no autorizada"
+        
+
+if __name__ == '__main__':
+    app.run(debug=True)
