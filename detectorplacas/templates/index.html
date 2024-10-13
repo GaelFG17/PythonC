@@ -21,12 +21,16 @@
                     var ss = response.status;
                     var message = response.message;
                     if (ss === 'success') {
+                        $('#result').text(response);
+                        setTimeout(function(){
+                            checkSignal();
+                        }, 5000);
                     }
                 },
                 error: function(error){
-                                console.log(error);
-                                checkSignal();
-                            }
+                            console.log(error);
+                            checkSignal();
+                        }
             });
         }
     </script>
